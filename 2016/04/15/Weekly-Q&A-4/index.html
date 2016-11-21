@@ -55,7 +55,7 @@
   
     
     
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
   
 
 
@@ -84,22 +84,22 @@
 
 
 
-<meta name="description" content="Q1: 在C++中如何处理unicode串？在这个过程中，char、wchar以及wstring是如何使用的？先理解unicode、UTF-8这些概念的区别，参考字符编码笔记：ASCII，Unicode和UTF-8。
+<meta name="description" content="在C++中如何处理unicode串？在这个过程中，char、wchar以及wstring是如何使用的？先理解unicode、UTF-8这些概念的区别，参考字符编码笔记：ASCII，Unicode和UTF-8。
 区别char和wchar_t。char处理字符，大小是1-bytes，而wchar_t是处理宽字符，在Linux系统上是4-bytes而Windows系统上是2-bytes。
-std">
+std::st">
 <meta property="og:type" content="article">
 <meta property="og:title" content="一周Q&A #4">
 <meta property="og:url" content="http://yoursite.com/2016/04/15/Weekly-Q&A-4/index.html">
 <meta property="og:site_name" content="My Beatnik Park">
-<meta property="og:description" content="Q1: 在C++中如何处理unicode串？在这个过程中，char、wchar以及wstring是如何使用的？先理解unicode、UTF-8这些概念的区别，参考字符编码笔记：ASCII，Unicode和UTF-8。
+<meta property="og:description" content="在C++中如何处理unicode串？在这个过程中，char、wchar以及wstring是如何使用的？先理解unicode、UTF-8这些概念的区别，参考字符编码笔记：ASCII，Unicode和UTF-8。
 区别char和wchar_t。char处理字符，大小是1-bytes，而wchar_t是处理宽字符，在Linux系统上是4-bytes而Windows系统上是2-bytes。
-std">
-<meta property="og:updated_time" content="2016-11-21T01:36:54.099Z">
+std::st">
+<meta property="og:updated_time" content="2016-11-21T03:24:00.646Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一周Q&A #4">
-<meta name="twitter:description" content="Q1: 在C++中如何处理unicode串？在这个过程中，char、wchar以及wstring是如何使用的？先理解unicode、UTF-8这些概念的区别，参考字符编码笔记：ASCII，Unicode和UTF-8。
+<meta name="twitter:description" content="在C++中如何处理unicode串？在这个过程中，char、wchar以及wstring是如何使用的？先理解unicode、UTF-8这些概念的区别，参考字符编码笔记：ASCII，Unicode和UTF-8。
 区别char和wchar_t。char处理字符，大小是1-bytes，而wchar_t是处理宽字符，在Linux系统上是4-bytes而Windows系统上是2-bytes。
-std">
+std::st">
 
 
 
@@ -196,22 +196,22 @@ std">
         </li>
       
         
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-about">
           <a href="/about" rel="section">
             
               <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
             
             关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
           </a>
         </li>
       
@@ -355,28 +355,28 @@ std">
       
 
       
-        <h2 id="Q1-在C-中如何处理unicode串？在这个过程中，char、wchar以及wstring是如何使用的？"><a href="#Q1-在C-中如何处理unicode串？在这个过程中，char、wchar以及wstring是如何使用的？" class="headerlink" title="Q1: 在C++中如何处理unicode串？在这个过程中，char、wchar以及wstring是如何使用的？"></a>Q1: 在C++中如何处理unicode串？在这个过程中，char、wchar以及wstring是如何使用的？</h2><p>先理解<code>unicode</code>、<code>UTF-8</code>这些概念的区别，参考<a href="http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html" target="_blank" rel="external">字符编码笔记：ASCII，Unicode和UTF-8</a>。</p>
+        <h3 id="在C-中如何处理unicode串？在这个过程中，char、wchar以及wstring是如何使用的？"><a href="#在C-中如何处理unicode串？在这个过程中，char、wchar以及wstring是如何使用的？" class="headerlink" title="在C++中如何处理unicode串？在这个过程中，char、wchar以及wstring是如何使用的？"></a>在C++中如何处理unicode串？在这个过程中，char、wchar以及wstring是如何使用的？</h3><p>先理解<code>unicode</code>、<code>UTF-8</code>这些概念的区别，参考<a href="http://www.ruanyifeng.com/blog/2007/10/ascii_unicode_and_utf-8.html" target="_blank" rel="external">字符编码笔记：ASCII，Unicode和UTF-8</a>。</p>
 <p>区别<code>char</code>和<code>wchar_t</code>。<code>char</code>处理字符，大小是<code>1-bytes</code>，而<code>wchar_t</code>是处理宽字符，在Linux系统上是<code>4-bytes</code>而Windows系统上是<code>2-bytes</code>。</p>
 <p><code>std::string</code>是<code>basic_string</code>在<code>char</code>类型上的实例化，而<code>std::wstring</code>则是在<code>wchar_t</code>上的实例化。<br>可以使用<code>std::string</code>来存中文或者其他的Unicode串，只不过用多个<code>char</code>来表示一个unicode字符了，所以可以使用<code>std::wstring</code>来处理。</p>
 <p>参考<a href="http://stackoverflow.com/questions/402283/stdwstring-vs-stdstring" target="_blank" rel="external">Stack Overflow</a>。</p>
-<h2 id="Q2-Lambda函数如何递归调用？如何在Lambda函数中调用成员函数？"><a href="#Q2-Lambda函数如何递归调用？如何在Lambda函数中调用成员函数？" class="headerlink" title="Q2: Lambda函数如何递归调用？如何在Lambda函数中调用成员函数？"></a>Q2: Lambda函数如何递归调用？如何在Lambda函数中调用成员函数？</h2><p>调用成员函数需要捕捉<code>this</code>，参考<a href="http://stackoverflow.com/questions/11284059/call-method-inside-lambda-expression" target="_blank" rel="external">Stack Overflow</a>：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Test &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">fun</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"FUN"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">lambdaTest</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">auto</span> lambdaFun = [<span class="keyword">this</span>]() &#123;</div><div class="line">			<span class="keyword">this</span>-&gt;fun();</div><div class="line">		&#125;;</div><div class="line">		lambdaFun();</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<h3 id="Lambda函数如何递归调用？如何在Lambda函数中调用成员函数？"><a href="#Lambda函数如何递归调用？如何在Lambda函数中调用成员函数？" class="headerlink" title="Lambda函数如何递归调用？如何在Lambda函数中调用成员函数？"></a>Lambda函数如何递归调用？如何在Lambda函数中调用成员函数？</h3><p>调用成员函数需要捕捉<code>this</code>，参考<a href="http://stackoverflow.com/questions/11284059/call-method-inside-lambda-expression" target="_blank" rel="external">Stack Overflow</a>：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Test &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">fun</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"FUN"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">void</span> <span class="title">lambdaTest</span><span class="params">()</span> </span>&#123;</div><div class="line">		<span class="keyword">auto</span> lambdaFun = [<span class="keyword">this</span>]() &#123;</div><div class="line">			<span class="keyword">this</span>-&gt;fun();</div><div class="line">		&#125;;</div><div class="line">		lambdaFun();</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
 <p>若想在Lambda函数里进行递归，需要捕捉函数本身的引用，并且不能使用<code>auto</code>进行类型推断，参考<a href="http://stackoverflow.com/questions/2067988/recursive-lambda-functions-in-c11" target="_blank" rel="external">Stack Overflow</a>。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//std::function类型定义在functional.h头文件里，void是指返回类型，两个int是指参数类型</span></div><div class="line">function&lt;<span class="keyword">void</span>(<span class="keyword">int</span>, <span class="keyword">int</span>)&gt; t = [&amp;t](<span class="keyword">int</span> a, <span class="keyword">int</span> b)-&gt;<span class="keyword">void</span>&#123;</div><div class="line">  <span class="keyword">if</span> (a &lt; b) t(a + <span class="number">1</span>, b);</div><div class="line">  <span class="keyword">else</span> <span class="built_in">cout</span> &lt;&lt; <span class="string">"DONE"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
 <a id="more"></a>
-<h2 id="Q3-C-中比较函数需要遵守的Strict-Weak-Ordering是什么意思？"><a href="#Q3-C-中比较函数需要遵守的Strict-Weak-Ordering是什么意思？" class="headerlink" title="Q3: C++中比较函数需要遵守的Strict Weak Ordering是什么意思？"></a>Q3: C++中比较函数需要遵守的Strict Weak Ordering是什么意思？</h2><p>参考<a href="http://stackoverflow.com/questions/979759/operator-and-strict-weak-ordering" target="_blank" rel="external">Stack Overflow</a>，当定义自定义的比较函数时，需要满足这个要求。</p>
+<h3 id="C-中比较函数需要遵守的Strict-Weak-Ordering是什么意思？"><a href="#C-中比较函数需要遵守的Strict-Weak-Ordering是什么意思？" class="headerlink" title="C++中比较函数需要遵守的Strict Weak Ordering是什么意思？"></a>C++中比较函数需要遵守的Strict Weak Ordering是什么意思？</h3><p>参考<a href="http://stackoverflow.com/questions/979759/operator-and-strict-weak-ordering" target="_blank" rel="external">Stack Overflow</a>，当定义自定义的比较函数时，需要满足这个要求。</p>
 <p>也就是说，给一个比较函数<code>f(a,b)</code>，当<code>a == b</code>时，<code>f(a,b)</code>和<code>f(b,a)</code>都必须是<code>false</code>。</p>
-<h2 id="Q4-CMake中如何打开C-11？如何导入Eigen库？"><a href="#Q4-CMake中如何打开C-11？如何导入Eigen库？" class="headerlink" title="Q4: CMake中如何打开C++11？如何导入Eigen库？"></a>Q4: CMake中如何打开C++11？如何导入Eigen库？</h2><p>在CMake中需要使用C++11的特性时，参考<a href="http://stackoverflow.com/questions/10984442/how-to-detect-c11-support-of-a-compiler-with-cmake/20165220#20165220" target="_blank" rel="external">Stack Overflow</a>和<a href="http://stackoverflow.com/questions/10851247/how-to-activate-c-11-in-cmake" target="_blank" rel="external">Stack Overflow</a>，可以使用<code>CHECK_CXX_COMPILER_FLAG</code>或者<code>CXX_STANDARD</code>。</p>
+<h3 id="CMake中如何打开C-11？如何导入Eigen库？"><a href="#CMake中如何打开C-11？如何导入Eigen库？" class="headerlink" title="CMake中如何打开C++11？如何导入Eigen库？"></a>CMake中如何打开C++11？如何导入Eigen库？</h3><p>在CMake中需要使用C++11的特性时，参考<a href="http://stackoverflow.com/questions/10984442/how-to-detect-c11-support-of-a-compiler-with-cmake/20165220#20165220" target="_blank" rel="external">Stack Overflow</a>和<a href="http://stackoverflow.com/questions/10851247/how-to-activate-c-11-in-cmake" target="_blank" rel="external">Stack Overflow</a>，可以使用<code>CHECK_CXX_COMPILER_FLAG</code>或者<code>CXX_STANDARD</code>。</p>
 <p>而当使用Eigen库时，需要使用<code>INCLUDE_DIRECTORIES</code>和环境变量，参考<a href="http://stackoverflow.com/questions/12249140/find-package-eigen3-for-cmake" target="_blank" rel="external">Stack Overflow</a>。</p>
-<h2 id="Q5-abs-double-函数中的坑"><a href="#Q5-abs-double-函数中的坑" class="headerlink" title="Q5: abs(double)函数中的坑"></a>Q5: abs(double)函数中的坑</h2><p>其实在C++中，使用<code>std::abs</code>就可以满足所有的需求了，因为它重载了基本所有的类型。而在C中，<code>abs</code>只用于整数，而对于浮点数，就得使用<code>fabs</code>了。</p>
+<h3 id="abs-double-函数中的坑"><a href="#abs-double-函数中的坑" class="headerlink" title="abs(double)函数中的坑"></a>abs(double)函数中的坑</h3><p>其实在C++中，使用<code>std::abs</code>就可以满足所有的需求了，因为它重载了基本所有的类型。而在C中，<code>abs</code>只用于整数，而对于浮点数，就得使用<code>fabs</code>了。</p>
 <p>然而这两个函数在C++中也可以使用，所以要注意<code>std::</code>限定符。参考<a href="http://stackoverflow.com/questions/3118165/when-do-i-use-fabs-and-when-is-it-sufficient-to-use-stdabs" target="_blank" rel="external">Stack Overflow</a>和<a href="http://stackoverflow.com/questions/33738509/whats-the-difference-between-abs-vs-fabs-in-c" target="_blank" rel="external">Stack Overflow</a>。</p>
-<h2 id="Q6-double比较如何最优？"><a href="#Q6-double比较如何最优？" class="headerlink" title="Q6: double比较如何最优？"></a>Q6: double比较如何最优？</h2><p>浮点数类型不能直接比较，一般会使用两数做差求绝对值，再和某个数比较：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">AreSame</span><span class="params">(<span class="keyword">double</span> a, <span class="keyword">double</span> b)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="built_in">fabs</span>(a - b) &lt; EPSILON;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="double比较如何最优？"><a href="#double比较如何最优？" class="headerlink" title="double比较如何最优？"></a>double比较如何最优？</h3><p>浮点数类型不能直接比较，一般会使用两数做差求绝对值，再和某个数比较：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">AreSame</span><span class="params">(<span class="keyword">double</span> a, <span class="keyword">double</span> b)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="built_in">fabs</span>(a - b) &lt; EPSILON;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>但是这种方法其实不见得适用所有的情况，所以不同的情况要单独讨论。参考<a href="http://stackoverflow.com/questions/17333/most-effective-way-for-float-and-double-comparison" target="_blank" rel="external">Stack Overflow</a></p>
-<h2 id="Q7-为什么函数式编程比较适用于并行？"><a href="#Q7-为什么函数式编程比较适用于并行？" class="headerlink" title="Q7: 为什么函数式编程比较适用于并行？"></a>Q7: 为什么函数式编程比较适用于并行？</h2><p>首先理解什么是<code>side effect</code>，参考<a href="http://programmers.stackexchange.com/questions/40297/what-is-a-side-effect" target="_blank" rel="external">StackExchange</a>，意思就是说是否会改变状态。</p>
+<h3 id="为什么函数式编程比较适用于并行？"><a href="#为什么函数式编程比较适用于并行？" class="headerlink" title="为什么函数式编程比较适用于并行？"></a>为什么函数式编程比较适用于并行？</h3><p>首先理解什么是<code>side effect</code>，参考<a href="http://programmers.stackexchange.com/questions/40297/what-is-a-side-effect" target="_blank" rel="external">StackExchange</a>，意思就是说是否会改变状态。</p>
 <p>而函数式编程是没有<code>side effect</code>的，数据是<code>immutable</code>的（没有状态，计算结果也不依赖状态），所以并行起来比较容易。参考<a href="https://www.zhihu.com/question/20494346" target="_blank" rel="external">知乎</a>和<a href="https://www.quora.com/Why-does-functional-programming-favor-concurrency" target="_blank" rel="external">Quora</a>。</p>
-<h2 id="Q8：Stack-Overflow是什么？为何会发生？"><a href="#Q8：Stack-Overflow是什么？为何会发生？" class="headerlink" title="Q8：Stack Overflow是什么？为何会发生？"></a>Q8：Stack Overflow是什么？为何会发生？</h2><p>栈是处于地址空间的上方，然后从上往下使用，而堆则是位于下方，从下往上使用。所以栈就有可能用完地址空间，与堆发生“碰撞”。</p>
+<h3 id="Stack-Overflow是什么？为何会发生？"><a href="#Stack-Overflow是什么？为何会发生？" class="headerlink" title="Stack Overflow是什么？为何会发生？"></a>Stack Overflow是什么？为何会发生？</h3><p>栈是处于地址空间的上方，然后从上往下使用，而堆则是位于下方，从下往上使用。所以栈就有可能用完地址空间，与堆发生“碰撞”。</p>
 <p>一般造成这种情况的都是无法停止的递归，用完了栈空间。参考<a href="http://stackoverflow.com/questions/214741/what-is-a-stackoverflowerror" target="_blank" rel="external">StackOverflow</a>。</p>
-<h2 id="Q9-C-在释放内存时，如何知道需要释放内存的大小？"><a href="#Q9-C-在释放内存时，如何知道需要释放内存的大小？" class="headerlink" title="Q9: C++在释放内存时，如何知道需要释放内存的大小？"></a>Q9: C++在释放内存时，如何知道需要释放内存的大小？</h2><p>C++中是在分配数组空间时多分配了4个字节的大小，专门保存数组的大小，在进行<code>delete</code>操作时就可以取出这个保存的数来进行释放了。</p>
+<h3 id="C-在释放内存时，如何知道需要释放内存的大小？"><a href="#C-在释放内存时，如何知道需要释放内存的大小？" class="headerlink" title="C++在释放内存时，如何知道需要释放内存的大小？"></a>C++在释放内存时，如何知道需要释放内存的大小？</h3><p>C++中是在分配数组空间时多分配了4个字节的大小，专门保存数组的大小，在进行<code>delete</code>操作时就可以取出这个保存的数来进行释放了。</p>
 <p>参考<a href="http://blog.csdn.net/nodeathphoenix/article/details/39693865" target="_blank" rel="external">Blog</a>、<a href="https://www.zhihu.com/question/25556263" target="_blank" rel="external">知乎</a>和<a href="https://www.zhihu.com/question/41567197" target="_blank" rel="external">知乎</a>。</p>
-<h2 id="Q10-关于堆和栈的大小。"><a href="#Q10-关于堆和栈的大小。" class="headerlink" title="Q10: 关于堆和栈的大小。"></a>Q10: 关于堆和栈的大小。</h2><p>这两个概念可以参考<a href="http://stackoverflow.com/questions/79923/what-and-where-are-the-stack-and-heap" target="_blank" rel="external">Stack Overflow</a>上这个问题的解答。</p>
+<h3 id="关于堆和栈的大小。"><a href="#关于堆和栈的大小。" class="headerlink" title="关于堆和栈的大小。"></a>关于堆和栈的大小。</h3><p>这两个概念可以参考<a href="http://stackoverflow.com/questions/79923/what-and-where-are-the-stack-and-heap" target="_blank" rel="external">Stack Overflow</a>上这个问题的解答。</p>
 <p>一般栈是属于一个线程的，大小也由这个线程决定（编译器决定），而堆是与这个应用挂钩的，所以大小也和这个应用分配的有关（系统决定），并且会逐步增加。</p>
 <p>还可以参考<a href="http://stackoverflow.com/questions/12687274/size-of-stack-and-heap-memory" target="_blank" rel="external">Stack Overflow</a>。</p>
 
@@ -583,7 +583,7 @@ std">
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Q1-在C-中如何处理unicode串？在这个过程中，char、wchar以及wstring是如何使用的？"><span class="nav-number">1.</span> <span class="nav-text">Q1: 在C++中如何处理unicode串？在这个过程中，char、wchar以及wstring是如何使用的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q2-Lambda函数如何递归调用？如何在Lambda函数中调用成员函数？"><span class="nav-number">2.</span> <span class="nav-text">Q2: Lambda函数如何递归调用？如何在Lambda函数中调用成员函数？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q3-C-中比较函数需要遵守的Strict-Weak-Ordering是什么意思？"><span class="nav-number">3.</span> <span class="nav-text">Q3: C++中比较函数需要遵守的Strict Weak Ordering是什么意思？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q4-CMake中如何打开C-11？如何导入Eigen库？"><span class="nav-number">4.</span> <span class="nav-text">Q4: CMake中如何打开C++11？如何导入Eigen库？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q5-abs-double-函数中的坑"><span class="nav-number">5.</span> <span class="nav-text">Q5: abs(double)函数中的坑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q6-double比较如何最优？"><span class="nav-number">6.</span> <span class="nav-text">Q6: double比较如何最优？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q7-为什么函数式编程比较适用于并行？"><span class="nav-number">7.</span> <span class="nav-text">Q7: 为什么函数式编程比较适用于并行？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q8：Stack-Overflow是什么？为何会发生？"><span class="nav-number">8.</span> <span class="nav-text">Q8：Stack Overflow是什么？为何会发生？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q9-C-在释放内存时，如何知道需要释放内存的大小？"><span class="nav-number">9.</span> <span class="nav-text">Q9: C++在释放内存时，如何知道需要释放内存的大小？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q10-关于堆和栈的大小。"><span class="nav-number">10.</span> <span class="nav-text">Q10: 关于堆和栈的大小。</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#在C-中如何处理unicode串？在这个过程中，char、wchar以及wstring是如何使用的？"><span class="nav-number">1.</span> <span class="nav-text">在C++中如何处理unicode串？在这个过程中，char、wchar以及wstring是如何使用的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Lambda函数如何递归调用？如何在Lambda函数中调用成员函数？"><span class="nav-number">2.</span> <span class="nav-text">Lambda函数如何递归调用？如何在Lambda函数中调用成员函数？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-中比较函数需要遵守的Strict-Weak-Ordering是什么意思？"><span class="nav-number">3.</span> <span class="nav-text">C++中比较函数需要遵守的Strict Weak Ordering是什么意思？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CMake中如何打开C-11？如何导入Eigen库？"><span class="nav-number">4.</span> <span class="nav-text">CMake中如何打开C++11？如何导入Eigen库？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#abs-double-函数中的坑"><span class="nav-number">5.</span> <span class="nav-text">abs(double)函数中的坑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#double比较如何最优？"><span class="nav-number">6.</span> <span class="nav-text">double比较如何最优？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么函数式编程比较适用于并行？"><span class="nav-number">7.</span> <span class="nav-text">为什么函数式编程比较适用于并行？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stack-Overflow是什么？为何会发生？"><span class="nav-number">8.</span> <span class="nav-text">Stack Overflow是什么？为何会发生？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-在释放内存时，如何知道需要释放内存的大小？"><span class="nav-number">9.</span> <span class="nav-text">C++在释放内存时，如何知道需要释放内存的大小？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关于堆和栈的大小。"><span class="nav-number">10.</span> <span class="nav-text">关于堆和栈的大小。</span></a></li></ol></div>
             
 
           </div>
