@@ -1,0 +1,684 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="开发，笔记,C++," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="在C++中调用C函数在C++中调用C函数比较简单，因为C++基本支持C中的语法。
+首先在一个头文件里声明一个C函数，注意这里函数前面需要加上一个extern，原因可以参考引用网站：1234567//cHeader.h#ifndef C_HEADER#define C_HEADERextern void testFun();#endif
+然后进行实现：123456//cSource.c#includ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="#开发笔记# 如何混编C++和C">
+<meta property="og:url" content="http://yoursite.com/2015/07/19/Note-Mix-C-and-C-Plus-Plus/index.html">
+<meta property="og:site_name" content="My Beatnik Park">
+<meta property="og:description" content="在C++中调用C函数在C++中调用C函数比较简单，因为C++基本支持C中的语法。
+首先在一个头文件里声明一个C函数，注意这里函数前面需要加上一个extern，原因可以参考引用网站：1234567//cHeader.h#ifndef C_HEADER#define C_HEADERextern void testFun();#endif
+然后进行实现：123456//cSource.c#includ">
+<meta property="og:updated_time" content="2016-11-21T01:24:34.250Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="#开发笔记# 如何混编C++和C">
+<meta name="twitter:description" content="在C++中调用C函数在C++中调用C函数比较简单，因为C++基本支持C中的语法。
+首先在一个头文件里声明一个C函数，注意这里函数前面需要加上一个extern，原因可以参考引用网站：1234567//cHeader.h#ifndef C_HEADER#define C_HEADERextern void testFun();#endif
+然后进行实现：123456//cSource.c#includ">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '作者'
+    }
+  };
+</script>
+
+  <title> #开发笔记# 如何混编C++和C | My Beatnik Park </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">My Beatnik Park</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Give Me Gin and Tonic</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                #开发笔记# 如何混编C++和C
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-07-19T16:34:24+08:00" content="2015-07-19">
+              2015-07-19
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/开发笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">开发笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="在C-中调用C函数"><a href="#在C-中调用C函数" class="headerlink" title="在C++中调用C函数"></a>在C++中调用C函数</h2><p>在C++中调用C函数比较简单，因为C++基本支持C中的语法。</p>
+<p>首先在一个头文件里声明一个C函数，注意这里函数前面需要加上一个<code>extern</code>，原因可以参考引用网站：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//cHeader.h</span></div><div class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> C_HEADER</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> C_HEADER</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">extern</span> <span class="keyword">void</span> <span class="title">testFun</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div></pre></td></tr></table></figure></p>
+<p>然后进行实现：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//cSource.c</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"cHeader.h"</span></span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">testFun</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"Hello World"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>接下来需要在C++代码中进行调用，注意引用头文件时需要放在<code>extern</code>块中：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//cppSource.cpp</span></div><div class="line"><span class="keyword">extern</span> <span class="string">"C"</span> &#123;</div><div class="line">    <span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"cHeader.h"</span></span></div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span>*argv)</span> </span>&#123;</div><div class="line">    testFun();</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<h2 id="在C中调用C-函数"><a href="#在C中调用C-函数" class="headerlink" title="在C中调用C++函数"></a>在C中调用C++函数</h2><p>而在C语言中调用C++代码，就比较复杂了，因为涉及到类和模版等C语言不支持的特性。</p>
+<h3 id="不涉及类的函数"><a href="#不涉及类的函数" class="headerlink" title="不涉及类的函数"></a>不涉及类的函数</h3><p>首先考虑不涉及类的函数。在C++头文件中的声明如下，注意函数前的<code>extern &quot;C&quot;</code>：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//cppHeader.h</span></div><div class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> CPP_HEADER</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> CPP_HEADER</span></div><div class="line"></div><div class="line"><span class="keyword">extern</span> <span class="string">"C"</span> <span class="function"><span class="keyword">void</span> <span class="title">testFunc</span><span class="params">()</span></span>;</div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div></pre></td></tr></table></figure></p>
+<p>然后在C++源文件中进行实现：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//cppSource.cpp</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"cppHeader.h"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">testFunc</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="string">"Hello World"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>而在C语言中对这个函数进行调用则需要声明这个函数：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">extern</span> <span class="keyword">void</span> <span class="title">testFunc</span><span class="params">()</span></span>;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span>*argv)</span> </span>&#123;</div><div class="line">    testFun();</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="涉及类的函数"><a href="#涉及类的函数" class="headerlink" title="涉及类的函数"></a>涉及类的函数</h3><p>当C++代码中涉及到了面向对象的内容的话，就需要使用空指针来完成混合编程了。<br>首先在头文件中声明一个类和相应的成员函数：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//cppHeader.h</span></div><div class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> CPP_HEADER</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> CPP_HEADER</span></div><div class="line"><span class="keyword">class</span> TestObj &#123;</div><div class="line">    <span class="keyword">public</span>:</div><div class="line">        TestObj(<span class="keyword">int</span> data) : classData(data) &#123;&#125;</div><div class="line">        <span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">getData</span><span class="params">()</span>  </span>&#123;</div><div class="line">            <span class="keyword">return</span> classData;</div><div class="line">        &#125;</div><div class="line">    <span class="keyword">private</span>:</div><div class="line">        <span class="keyword">int</span> classData</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>如果我们需要在C中使用这个类，那么还需要一些Wrap函数，首先定义一个C++头文件：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//cppWrapHeader.h</span></div><div class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> CPP_WRAP_HEADER</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> CPP_WRAP_HEADER</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"cppHeader.h"</span></span></div><div class="line"><span class="keyword">extern</span> <span class="string">"C"</span> voidTestObj_new(<span class="keyword">int</span> data);</div><div class="line"><span class="keyword">extern</span> <span class="string">"C"</span> <span class="function"><span class="keyword">void</span> <span class="title">TestObj_free</span><span class="params">(voidtestObj)</span></span>;</div><div class="line"><span class="keyword">extern</span> <span class="string">"C"</span> <span class="function"><span class="keyword">int</span> <span class="title">TestObj_getData</span><span class="params">(voidtestObj)</span></span>;</div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div></pre></td></tr></table></figure></p>
+<p>然后实现这些Wrap函数，在函数中对<code>void指针</code>进行类型转换，使其能满足使用的要求：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//cppWrapSource.cpp</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"cppWrapHeader.cpp"</span></span></div><div class="line"><span class="keyword">extern</span> <span class="string">"C"</span> voidTestObj_new(<span class="keyword">int</span> data) &#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">static_cast</span>&lt;<span class="keyword">void</span>*&gt;(<span class="keyword">new</span> TestObj(data));</div><div class="line">&#125;</div><div class="line"><span class="keyword">extern</span> <span class="string">"C"</span> <span class="function"><span class="keyword">void</span> <span class="title">TestObj_free</span><span class="params">(voidtestObj)</span> </span>&#123;</div><div class="line">    <span class="keyword">delete</span> <span class="keyword">static_cast</span>&lt;TestObj*&gt;(testObj);</div><div class="line">&#125;</div><div class="line"><span class="keyword">extern</span> <span class="string">"C"</span> <span class="function"><span class="keyword">int</span> <span class="title">TestObj_getData</span><span class="params">(voidtestObj)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">static_cast</span>&lt;TestObj*&gt;(testObj)-&gt;getData();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>接下来当我们需要在C语言中使用这些函数时，只需要操作<code>void指针</code>就行了：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//cSource.c</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"cppWrapHeader.h"</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span>*argv)</span> </span>&#123;</div><div class="line">    voidtestObj = TestObj_new(<span class="number">10</span>);</div><div class="line">    <span class="keyword">int</span> result = TestObj_getData(testObj);</div><div class="line">    TestObj_free(testObj);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="CMAKE中的设定"><a href="#CMAKE中的设定" class="headerlink" title="CMAKE中的设定"></a>CMAKE中的设定</h2><p>完成混编时，在CMAKE文件中不需要过多的设置只用设置好两个编译器就行了：<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span>(CMAKE_C_FLAGS <span class="string">"$&#123;CMAKE_C_FLAGS&#125; -std=c99"</span>)</div><div class="line"><span class="keyword">set</span>(CMAKE_CXX_FLAGS <span class="string">"$&#123;CMAKE_CXX_FLAGS&#125;"</span>)</div></pre></td></tr></table></figure></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://stackoverflow.com/questions/3583353/calling-c-class-member-function-from-c-code" target="_blank" rel="external">Calling “C++” class member function from “C” code</a><br><a href="http://stackoverflow.com/questions/14815274/how-to-call-a-c-method-from-c" target="_blank" rel="external">How to call a C++ method from C?</a><br><a href="http://www.cnblogs.com/skynet/archive/2010/07/10/1774964.html" target="_blank" rel="external">C++项目中的extern “C” {}</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/开发，笔记/" rel="tag">#开发，笔记</a>
+          
+            <a href="/tags/C/" rel="tag">#C++</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/06/05/Weekly-Q&A-1/" rel="next" title="一周Q&A #1">
+                <i class="fa fa-chevron-left"></i> 一周Q&A #1
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/07/24/Weekly-Q&A-2/" rel="prev" title="一周Q&A #2">
+                一周Q&A #2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Chen You" />
+          <p class="site-author-name" itemprop="name">Chen You</p>
+          <p class="site-description motion-element" itemprop="description">东张西望 一无所长</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/chenyou-fdu" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github-alt"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/1924480272" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/chen-you-fdu" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/lazyguy/" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#在C-中调用C函数"><span class="nav-number">1.</span> <span class="nav-text">在C++中调用C函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在C中调用C-函数"><span class="nav-number">2.</span> <span class="nav-text">在C中调用C++函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#不涉及类的函数"><span class="nav-number">2.1.</span> <span class="nav-text">不涉及类的函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#涉及类的函数"><span class="nav-number">2.2.</span> <span class="nav-text">涉及类的函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CMAKE中的设定"><span class="nav-number">3.</span> <span class="nav-text">CMAKE中的设定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Chen You</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,712 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="笔记,算法," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="根据TopCoder上Introduction to Graphs and Their Data Structures这篇Tutorial以及平时自己的一些实现心得进行笔记。
+图的数据结构邻接矩阵表示使用vector&amp;lt; vector&amp;lt;int&amp;gt; &amp;gt;。这里注意，在C++11之前，&amp;lt;&amp;lt;不能连写。邻接表的实现需要自定义一个结点类：123456class Edge &amp;#1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="#开发笔记# 图类问题解法笔记">
+<meta property="og:url" content="http://yoursite.com/2015/05/06/Note-Intro-to-Graphs/index.html">
+<meta property="og:site_name" content="My Beatnik Park">
+<meta property="og:description" content="根据TopCoder上Introduction to Graphs and Their Data Structures这篇Tutorial以及平时自己的一些实现心得进行笔记。
+图的数据结构邻接矩阵表示使用vector&amp;lt; vector&amp;lt;int&amp;gt; &amp;gt;。这里注意，在C++11之前，&amp;lt;&amp;lt;不能连写。邻接表的实现需要自定义一个结点类：123456class Edge &amp;#1">
+<meta property="og:updated_time" content="2016-11-21T01:24:27.157Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="#开发笔记# 图类问题解法笔记">
+<meta name="twitter:description" content="根据TopCoder上Introduction to Graphs and Their Data Structures这篇Tutorial以及平时自己的一些实现心得进行笔记。
+图的数据结构邻接矩阵表示使用vector&amp;lt; vector&amp;lt;int&amp;gt; &amp;gt;。这里注意，在C++11之前，&amp;lt;&amp;lt;不能连写。邻接表的实现需要自定义一个结点类：123456class Edge &amp;#1">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '作者'
+    }
+  };
+</script>
+
+  <title> #开发笔记# 图类问题解法笔记 | My Beatnik Park </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">My Beatnik Park</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Give Me Gin and Tonic</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                #开发笔记# 图类问题解法笔记
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-05-06T22:50:24+08:00" content="2015-05-06">
+              2015-05-06
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/算法笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">算法笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>根据TopCoder上<a href="https://www.topcoder.com/community/data-science/data-science-tutorials/introduction-to-graphs-and-their-data-structures-section-1/" target="_blank" rel="external">Introduction to Graphs and Their Data Structures</a>这篇Tutorial以及平时自己的一些实现心得进行笔记。</p>
+<h2 id="图的数据结构"><a href="#图的数据结构" class="headerlink" title="图的数据结构"></a>图的数据结构</h2><p>邻接矩阵表示使用<code>vector&lt; vector&lt;int&gt; &gt;</code>。这里注意，在C++11之前，<code>&lt;&lt;</code>不能连写。<br>邻接表的实现需要自定义一个结点类：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Edge &#123; <span class="comment">//how to store adjancy list with weight</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="keyword">int</span> target;</div><div class="line">    <span class="keyword">int</span> weight;</div><div class="line">    Edge(<span class="keyword">int</span> t, <span class="keyword">int</span> w) :target(t), weight(w)&#123;&#125;;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>然后使用一个<code>vector&lt;vector&lt;Edge&gt;&gt; adjList</code>来存储这个邻接表。这样的话，很容易可以查找到每个结点的出度，也就是每个节点的<code>size()</code>。<br>当边数远小于结点数时，使用邻接表要更节省空间，而且操作更加快速，不需要遍历每一行。<br><a id="more"></a></p>
+<h2 id="图的算法"><a href="#图的算法" class="headerlink" title="图的算法"></a>图的算法</h2><h3 id="深度优先遍历"><a href="#深度优先遍历" class="headerlink" title="深度优先遍历"></a>深度优先遍历</h3><p>从某一个节点开始，递归的遍历其所有子节点，当某一个节点的子节点都遍历了，就变成黑，被遍历的变成灰；时间$O(V+E)$。<br>DFS实现方式：（递归访问所用节点）</p>
+<pre><code>1. 访问初始顶点`v`并标记顶点`v`已访问；
+2. 查找顶点`v`的第一个邻接顶点w；
+3. 若顶点`v`的邻接顶点w存在，则继续执行；否则回溯到`v`，再找`v`的另外一个未被访问过的邻接点；
+4. 若顶点`w`尚未被访问，则继续访问顶点`w`并标记顶点`w`为已访问；
+5. 继续查找顶点`w`的下一个邻接顶点wi，重复直到都被访问；
+</code></pre><p> DFS的一些技巧：</p>
+<pre><code>1.  递归实现更加简单，使用循环实现也可，要使用堆栈，每次把所有相连节点都入栈，注意不管访问过没有都入，在出栈时进行判断；
+2.  边权重、节点权重的比较可以用一个参数来记录，每次递归调用函数时，加上变化量就好，然后用一个全局的变量记录最大（最小）值；
+3.  若有回朔，可以在递归回朔后把是否访问（`vis数组`）还原；
+</code></pre><h3 id="广度优先遍历"><a href="#广度优先遍历" class="headerlink" title="广度优先遍历"></a>广度优先遍历</h3><p>从某一个节点开始，遍历与其相连的所有节点，然后将该节点设为黑，被遍历的节点设为灰，重复这个过程，直到所有的节点都是黑色，注意遍历的先后顺序，用一个<code>FIFO</code>表来记录；时间$O(V+E)$。<br>BFS实现方式：</p>
+<pre><code>1.  顶点`v`入队列；
+2.  当队列非空时则继续执行步骤3；
+3.  出队列取得队头顶点`v`；访问顶点v并标记顶点v被访问；
+4.  查找顶点`v`的第一个邻接节点`col`。
+5.  若v的邻接顶点`col`是未被访问过的，则`col`入队列（入队列后需要标记为访问过）。
+6.  继续查找顶点`v`的另一个新的邻接顶点`col`，转到步骤5。直到顶点`v`的所有未被访问过的邻接处理完。转到步骤2。
+</code></pre><h3 id="Dijkstra算法"><a href="#Dijkstra算法" class="headerlink" title="Dijkstra算法"></a>Dijkstra算法</h3><p>Dijkstra算法是一种单源最短路径算法。<br>算法过程：</p>
+<pre><code>1.  从源点开始，每次添加距离当前结点最近的一个结点进入路径。
+2.  然后更新其他结点到该路径的最短距离，与Prim不同的是，是新选入结点与其他结点距离加上源点到新选入结点距离，再于之前值比较，得到最后的距离。
+3.  直到所有结点都被遍历，算法停止。
+</code></pre><p>如果使用最小堆实现的优先级队列，时间复杂度为$O(ElgV)$。使用斐波那契堆实现的话，时间复杂度为$O(VlgV+E)$。<br>普通实现（使用邻接矩阵，优先级队列和邻接表）：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">DijsktraAdjMat</span><span class="params">(<span class="keyword">int</span> adjMat[][<span class="number">20</span>], <span class="keyword">int</span> s, <span class="keyword">int</span> len)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> *isVisited = <span class="keyword">new</span> <span class="keyword">int</span>[len];</div><div class="line">    <span class="keyword">int</span> *dist = <span class="keyword">new</span> <span class="keyword">int</span>[len];</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; ++i)</div><div class="line">    &#123;</div><div class="line">        dist[i] = adjMat[s][i];</div><div class="line">        isVisited[i] = <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line">    isVisited[s] = <span class="number">1</span>;</div><div class="line">    dist[<span class="number">0</span>] = <span class="number">0</span>;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; s &lt;&lt; <span class="string">" "</span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; len; ++i)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">int</span> tempMin = maxValue;</div><div class="line">        <span class="keyword">int</span> tempIndex = <span class="number">-1</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; len; ++j)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span>(!isVisited[j] &amp;&amp; tempMin &gt; dist[j])</div><div class="line">            &#123;</div><div class="line">                tempMin = dist[j];</div><div class="line">                tempIndex = j;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        isVisited[tempIndex] = <span class="number">1</span>;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; tempIndex &lt;&lt; <span class="string">" "</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; len; ++j)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span>(adjMat[tempIndex][j] != maxValue)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">int</span> tempDist = adjMat[tempIndex][j] + dist[tempIndex]; <span class="comment">//get to node j through tempIndex</span></div><div class="line">                <span class="keyword">if</span>(tempDist &lt; dist[j])</div><div class="line">                    dist[j] = tempDist;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">    <span class="keyword">delete</span>[] isVisited;</div><div class="line">    <span class="keyword">delete</span>[] dist;</div><div class="line">&#125;</div><div class="line"><span class="keyword">class</span> Edge &#123; <span class="comment">//how to store adjancy list with weight</span></div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="keyword">int</span> target;</div><div class="line">    <span class="keyword">int</span> weight;</div><div class="line">    Edge(<span class="keyword">int</span> t, <span class="keyword">int</span> w) :target(t), weight(w)&#123;&#125;;</div><div class="line">&#125;;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">DijsktraAdjList</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;Edge&gt;&gt; adjList, <span class="keyword">int</span> root)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> vNum = (<span class="keyword">int</span>)adjList.size();</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; isVisited = <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(vNum, <span class="number">0</span>);</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dist = <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(vNum, maxValue);</div><div class="line">    dist[root] = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; vNum; i++)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">int</span> tempIndex = <span class="number">-1</span>;</div><div class="line">        <span class="keyword">int</span> tempMin = maxValue;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; vNum; ++j)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span> (!isVisited[j] &amp;&amp; dist[j] &lt; tempMin)</div><div class="line">            &#123;</div><div class="line">                tempIndex = j;</div><div class="line">                tempMin = dist[j];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        isVisited[tempIndex] = <span class="number">1</span>;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; tempIndex &lt;&lt; <span class="string">" "</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; adjList[tempIndex].size(); ++j) </div><div class="line">        &#123;</div><div class="line">            <span class="keyword">int</span> target = adjList[tempIndex][j].target;</div><div class="line">            <span class="keyword">int</span> weight = adjList[tempIndex][j].weight;</div><div class="line">            <span class="keyword">if</span> (dist[target] &gt; weight + dist[tempIndex])</div><div class="line">                dist[target] = weight + dist[tempIndex];</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>优先级队列实现（使用邻接表）：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">DijsktraPriority</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;Edge&gt;&gt; adjList, <span class="keyword">int</span> root)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> vNum = (<span class="keyword">int</span>)adjList.size();</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; isVisited = <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(vNum, <span class="number">0</span>);</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dist = <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;(vNum, maxValue);</div><div class="line">    <span class="keyword">auto</span> EdgeGreater = [](<span class="keyword">const</span> Edge&amp; e1, <span class="keyword">const</span> Edge&amp; e2)&#123;<span class="keyword">return</span> e1.weight &gt; e2.weight; &#125;;</div><div class="line">    priority_queue &lt; Edge, <span class="built_in">vector</span>&lt;Edge&gt;, <span class="keyword">decltype</span>(EdgeGreater)&gt; distQueue;</div><div class="line">    dist[root] = <span class="number">0</span>;</div><div class="line">    distQueue.push(Edge(<span class="number">0</span>, <span class="number">0</span>));</div><div class="line">    <span class="keyword">while</span> (!distQueue.empty())</div><div class="line">    &#123;</div><div class="line">        Edge tempMin = distQueue.top();</div><div class="line">        distQueue.pop();</div><div class="line">        <span class="keyword">int</span> tempMinTarget = tempMin.target;</div><div class="line">        <span class="keyword">if</span> (isVisited[tempMinTarget]) <span class="keyword">continue</span>;</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; tempMinTarget &lt;&lt; <span class="string">" "</span>;</div><div class="line">        isVisited[tempMinTarget] = <span class="number">1</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; adjList[tempMinTarget].size(); ++i)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">int</span> target = adjList[tempMinTarget][i].target;</div><div class="line">            <span class="keyword">int</span> weight = adjList[tempMinTarget][i].weight;</div><div class="line">            <span class="keyword">if</span> (dist[target] &gt; weight + dist[tempMinTarget])</div><div class="line">            &#123;</div><div class="line">                dist[target] = weight + dist[tempMinTarget];</div><div class="line">                distQueue.push(Edge(target, dist[target])); <span class="comment">//push the new establish min link into queue</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="Prim算法"><a href="#Prim算法" class="headerlink" title="Prim算法"></a>Prim算法</h3><p>Prim算法是一种针对无向图的最小生成树算法。<br>算法过程：</p>
+<pre><code>1.  从源点开始，每次添加距离Cut最近的一个节点进入这个Cut；
+2.  要一个表，记录图中每个节点到这个Cut的最短距离，然后每次添加了新的节点进入Cut时，需要对这个表进行更新；
+3.  刚添加进的那个节点，表中距离设为0，再把该节点的相邻的节点距离，与表中之前记录距离比较，选择小的那个；
+4.  这个表如果使用优先队列实现的话，效率好些，可以用`STL库`中的`priority_queue`或者自己实现一个最小堆；
+</code></pre><p>普通实现（使用邻接矩阵）：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">Prim</span><span class="params">(<span class="keyword">int</span> adjMat[][<span class="number">20</span>], <span class="keyword">int</span> source, <span class="keyword">int</span> len)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">int</span> *dist = <span class="keyword">new</span> <span class="keyword">int</span>[len];</div><div class="line">    <span class="keyword">int</span> *isVisited = <span class="keyword">new</span> <span class="keyword">int</span>[len];</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; chosenNode;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; ++i)</div><div class="line">    &#123;</div><div class="line">        <span class="comment">//if (adjMat[source][i] != maxValue) //maxvalue in adjMat means no path between these two node</span></div><div class="line">        dist[i] = adjMat[source][i];</div><div class="line">        <span class="comment">//else</span></div><div class="line">        <span class="comment">//    dist[i] = maxValue;</span></div><div class="line">        isVisited[i] = <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line">    dist[source] = <span class="number">0</span>;</div><div class="line">    isVisited[source] = <span class="number">1</span>;</div><div class="line">    chosenNode.push_back(source);</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; len; ++i)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">int</span> tempMin = maxValue;</div><div class="line">        <span class="keyword">int</span> tempIndex = <span class="number">-1</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; len; ++j)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span> (!isVisited[j] &amp;&amp; tempMin &gt; dist[j])</div><div class="line">            &#123;</div><div class="line">                tempMin = dist[j];</div><div class="line">                tempIndex = j;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        chosenNode.push_back(tempIndex);</div><div class="line">        isVisited[tempIndex] = <span class="number">1</span>;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; len; ++j)</div><div class="line">            <span class="keyword">if</span> (adjMat[tempIndex][j] &lt; dist[j]) <span class="comment">//chosen node will be 0, which is small enough to be kept</span></div><div class="line">                dist[j] = adjMat[tempIndex][j];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">delete</span>[] dist;</div><div class="line">    <span class="keyword">delete</span>[] isVisited;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; ++i)</div><div class="line">        <span class="built_in">cout</span> &lt;&lt; chosenNode[i] &lt;&lt; <span class="string">" "</span>;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="Kruskal算法"><a href="#Kruskal算法" class="headerlink" title="Kruskal算法"></a>Kruskal算法</h3><p>Kruskal算法算法是一种针对无向图的最小生成树算法。<br>算法过程：</p>
+<pre><code>1.  实现自定义`Edge`类，包含首位两个节点和边权重作为类成员，再把所有的边按权重大小进行排序，存入数组；
+2.  在边的数组中由小到大进行选择，选择的边要确保不会构成环路；
+3.  这样就要使用一个`VertexRoot`数组，记录每个节点所属的Cut，保证不把连接属于同一个Cut的两个节点的边选入；
+4.  最开始每个节点都属于自己这个Cut，所以`VertexRoot`的初值是其自己；
+5.  然后每次选择一条边时，就把这两个Cut连接在一起，这需要循环遍历来修改`VertexRoot`的值，保证两个Cut里所有节点在VertexRoot存的值一样；
+6.  处理完边的数组里所有的边，就产生了一个最小生成树；
+</code></pre><p>算法实现：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Edge&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    Edge(<span class="keyword">int</span> s, <span class="keyword">int</span> e, <span class="keyword">int</span> v) : start(s), end(e), value(v)&#123;&#125;</div><div class="line">    <span class="keyword">int</span> start, end, value;</div><div class="line">&#125;;</div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmpEdge</span><span class="params">(<span class="keyword">const</span> Edge &amp;n1, <span class="keyword">const</span> Edge &amp;n2)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> n1.value &lt; n2.value;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">Kruskal</span><span class="params">(<span class="built_in">vector</span>&lt;Edge&gt; edgeVec, <span class="keyword">int</span> len)</span></span></div><div class="line">&#123;</div><div class="line">    sort(edgeVec.begin(), edgeVec.end(), cmpEdge);</div><div class="line">    <span class="keyword">int</span> *nodeRoot = <span class="keyword">new</span> <span class="keyword">int</span>[len];</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++)</div><div class="line">    &#123;</div><div class="line">        nodeRoot[i] = i;<span class="comment">//save the root of every node, to ensure that no cycle is contained</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; edgeVec.size(); i++)</div><div class="line">    &#123;</div><div class="line">        Edge tempEdge = edgeVec[i];</div><div class="line">        <span class="keyword">if</span> (nodeRoot[tempEdge.start] != nodeRoot[tempEdge.end])</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">int</span> temp = nodeRoot[tempEdge.end]; </div><div class="line">            <span class="comment">//keep in mind that nodeRoot[tempEdge.end] could be changed during the loop below,</span></div><div class="line">            <span class="comment">//so it's necessary to save the value into some temp var for compare</span></div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; len; ++j)</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">if</span> (nodeRoot[j] == temp)</div><div class="line">                    nodeRoot[j] = nodeRoot[tempEdge.start];</div><div class="line">                <span class="keyword">else</span></div><div class="line">                    <span class="keyword">continue</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="built_in">cout</span> &lt;&lt; tempEdge.start &lt;&lt; <span class="string">"---"</span> &lt;&lt; tempEdge.end &lt;&lt; <span class="string">" "</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="Floyd-Washall-算法"><a href="#Floyd-Washall-算法" class="headerlink" title="Floyd-Washall 算法"></a>Floyd-Washall 算法</h3><p>Floyd-Washall算法可以计算出一个图内部所有结点与所有结点间的最短路径，而且可以计算负边的情况。<br>这种算法的时间复杂度是$O(n^3)$，大概的代码如下：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (k = <span class="number">1</span> to n)</div><div class="line">    <span class="keyword">for</span> (i = <span class="number">1</span> to n)</div><div class="line">        <span class="keyword">for</span> (j = <span class="number">1</span> to n)</div><div class="line">            adj[i][j] = min(adj[i][j], adj[i][k] + adj[k][j]);</div></pre></td></tr></table></figure></p>
+<h3 id="性能分析与比较"><a href="#性能分析与比较" class="headerlink" title="性能分析与比较"></a>性能分析与比较</h3><p>Kruskal算法中的不相交集合数据结构要是使用按秩结合和路径压缩的启发式方法，来实现不相交集合森林的话，效果最好，总时间为$O(ElgV)$；而Prim算法要是使用二叉最小堆来实现优先队列的话，时间也为$O(ElgV)$，要是使用斐波那契堆的话，可以把时间改进为$O(E+VlgV)$（这里内容详见算法导论23章）。</p>
+<p>如果是非常稠密的图（边数超过节点数很多），那么使用Prim算法更好，而当图很正常的话，使用Kruskal算法更好，因为数据结构更简单。</p>
+<p>Prim算法和Dijkstra算法的区别就在于，Prim算法求得是如何把这些节点连起来，而Dijkstra算法求得是如何从源节点到目标节点。两者的实现都需要维持一个数组记录距离，Prim算法的数组表示的是其他未访问结点到这个Cut的最短距离，而Dijkstra算法的数组表示的则是从源点出发，经过当前结点到其他结点的最短距离。</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>参考<a href="https://www.topcoder.com/community/data-science/data-science-tutorials/introduction-to-graphs-and-their-data-structures-section-1/" target="_blank" rel="external">TopCoder Tutorial Introduction to Graphs and Their Data Structures</a></p>
+<p>参考<a href="http://www.csie.ntnu.edu.tw/~u91029/Path.html#1" target="_blank" rel="external">演算法笔记-Path</a>。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/笔记/" rel="tag">#笔记</a>
+          
+            <a href="/tags/算法/" rel="tag">#算法</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/04/25/Note-How-to-Solve-a-Problem/" rel="next" title="#算法笔记# How to Find a Solution 笔记">
+                <i class="fa fa-chevron-left"></i> #算法笔记# How to Find a Solution 笔记
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/06/05/Weekly-Q&A-1/" rel="prev" title="一周Q&A #1">
+                一周Q&A #1 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Chen You" />
+          <p class="site-author-name" itemprop="name">Chen You</p>
+          <p class="site-description motion-element" itemprop="description">东张西望 一无所长</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/chenyou-fdu" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github-alt"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/1924480272" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/chen-you-fdu" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/lazyguy/" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#图的数据结构"><span class="nav-number">1.</span> <span class="nav-text">图的数据结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图的算法"><span class="nav-number">2.</span> <span class="nav-text">图的算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#深度优先遍历"><span class="nav-number">2.1.</span> <span class="nav-text">深度优先遍历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#广度优先遍历"><span class="nav-number">2.2.</span> <span class="nav-text">广度优先遍历</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dijkstra算法"><span class="nav-number">2.3.</span> <span class="nav-text">Dijkstra算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Prim算法"><span class="nav-number">2.4.</span> <span class="nav-text">Prim算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Kruskal算法"><span class="nav-number">2.5.</span> <span class="nav-text">Kruskal算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Floyd-Washall-算法"><span class="nav-number">2.6.</span> <span class="nav-text">Floyd-Washall 算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#性能分析与比较"><span class="nav-number">2.7.</span> <span class="nav-text">性能分析与比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他"><span class="nav-number">2.8.</span> <span class="nav-text">其他</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Chen You</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+</body>
+</html>

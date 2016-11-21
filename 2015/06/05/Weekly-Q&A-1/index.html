@@ -1,0 +1,695 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="笔记,日常," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="以后坚持每一周或两周记录下这段时间内的一些小的问题与其解决方法，包括开发和读论文中的各种问题。
+Q1: 在CMake设置中，如何设置Debug模式？使用-DCMAKE_BUILD_TYPE=这个参数进行设置，例如下面分别就是两个模式。
+12cmake -DCMAKE_BUILD_TYPE=Debug &amp;lt;path&amp;gt;cmake -DCMAKE_BUILD_TYPE=RelWithDebIn">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一周Q&A #1">
+<meta property="og:url" content="http://yoursite.com/2015/06/05/Weekly-Q&A-1/index.html">
+<meta property="og:site_name" content="My Beatnik Park">
+<meta property="og:description" content="以后坚持每一周或两周记录下这段时间内的一些小的问题与其解决方法，包括开发和读论文中的各种问题。
+Q1: 在CMake设置中，如何设置Debug模式？使用-DCMAKE_BUILD_TYPE=这个参数进行设置，例如下面分别就是两个模式。
+12cmake -DCMAKE_BUILD_TYPE=Debug &amp;lt;path&amp;gt;cmake -DCMAKE_BUILD_TYPE=RelWithDebIn">
+<meta property="og:updated_time" content="2016-11-21T01:33:56.794Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一周Q&A #1">
+<meta name="twitter:description" content="以后坚持每一周或两周记录下这段时间内的一些小的问题与其解决方法，包括开发和读论文中的各种问题。
+Q1: 在CMake设置中，如何设置Debug模式？使用-DCMAKE_BUILD_TYPE=这个参数进行设置，例如下面分别就是两个模式。
+12cmake -DCMAKE_BUILD_TYPE=Debug &amp;lt;path&amp;gt;cmake -DCMAKE_BUILD_TYPE=RelWithDebIn">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '作者'
+    }
+  };
+</script>
+
+  <title> 一周Q&A #1 | My Beatnik Park </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">My Beatnik Park</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Give Me Gin and Tonic</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                一周Q&A #1
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2015-06-05T22:19:45+08:00" content="2015-06-05">
+              2015-06-05
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Weekly-Q-A/" itemprop="url" rel="index">
+                    <span itemprop="name">Weekly Q&A</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>以后坚持每一周或两周记录下这段时间内的一些小的问题与其解决方法，包括开发和读论文中的各种问题。</p>
+<h3 id="Q1-在CMake设置中，如何设置Debug模式？"><a href="#Q1-在CMake设置中，如何设置Debug模式？" class="headerlink" title="Q1: 在CMake设置中，如何设置Debug模式？"></a>Q1: 在CMake设置中，如何设置Debug模式？</h3><p>使用<code>-DCMAKE_BUILD_TYPE=</code>这个参数进行设置，例如下面分别就是两个模式。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cmake -DCMAKE_BUILD_TYPE=Debug &lt;path&gt;</div><div class="line">cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo &lt;path&gt;</div></pre></td></tr></table></figure>
+<p>参考SO上这个问题： <a href="http://stackoverflow.com/questions/10005982/how-do-you-set-gdb-debug-flag-with-cmake" target="_blank" rel="external">How do you set GDB debug flag with cmake?</a></p>
+<h3 id="Q2：C99中PRIu64这一类宏如何使用？"><a href="#Q2：C99中PRIu64这一类宏如何使用？" class="headerlink" title="Q2：C99中PRIu64这一类宏如何使用？"></a>Q2：C99中PRIu64这一类宏如何使用？</h3><p>例子，注意这个头文件和这个宏定义都不可缺少：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">define</span> __STDC_FORMAT_MACROS</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;inttypes.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">uint64_t</span> ui64 = <span class="number">90</span>;</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"test uint64_t : %"</span> PRIu64 <span class="string">"\n"</span>, ui64);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可以用<code>%llu</code>、<code>%u</code>来进行代替。<br>参考SO上<a href="http://stackoverflow.com/questions/8132399/how-to-printf-uint64-t" target="_blank" rel="external">how to printf uint64_t?</a>和<a href="http://stackoverflow.com/questions/14535556/why-doesnt-priu64-work-in-this-code" target="_blank" rel="external">Why doesn’t PRIu64 work in this code?</a>。</p>
+<h3 id="Q3：如果一个字符串不是以NULL（-0）结尾怎么进行输出？"><a href="#Q3：如果一个字符串不是以NULL（-0）结尾怎么进行输出？" class="headerlink" title="Q3：如果一个字符串不是以NULL（\0）结尾怎么进行输出？"></a>Q3：如果一个字符串不是以NULL（\0）结尾怎么进行输出？</h3><p>使用<code>printf(&quot;%.*s&quot;, stringLength, pointerToString)</code>就行。<br><a id="more"></a></p>
+<h3 id="Q4：printf中-a是什么？"><a href="#Q4：printf中-a是什么？" class="headerlink" title="Q4：printf中%a是什么？"></a>Q4：printf中%a是什么？</h3><p>是C99标准中新定义的一种格式，用十六进制格式表示一个浮点数，相应的还有<code>%la</code>。与科学计数法<code>%e</code>相对应。</p>
+<p>具体可以参考<a href="http://www.exploringbinary.com/hexadecimal-floating-point-constants/" target="_blank" rel="external">Hexadecimal Floating-Point Constants</a>和SO上<a href="http://stackoverflow.com/questions/4826842/the-format-specifier-a-for-printf-in-c" target="_blank" rel="external">The format specifier %a for printf() in C</a>。</p>
+<!--more-->
+<h3 id="Q5：如何把一个一维数组转成多维数组来使用？"><a href="#Q5：如何把一个一维数组转成多维数组来使用？" class="headerlink" title="Q5：如何把一个一维数组转成多维数组来使用？"></a>Q5：如何把一个一维数组转成多维数组来使用？</h3><p>代码（C++）如下，这样就可以使用<code>ptr</code>这个数组指针以三维数组形式来进行遍历了。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> *arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">125</span>];</div><div class="line"><span class="keyword">int</span> (*ptr)[<span class="number">5</span>][<span class="number">5</span>][<span class="number">5</span>] = (<span class="keyword">int</span>(*)[<span class="number">5</span>][<span class="number">5</span>][<span class="number">5</span>])arr;</div></pre></td></tr></table></figure>
+<p>C语言中是这样，要稍微简单些；</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> *arr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">125</span>];</div><div class="line"><span class="keyword">int</span> (*ptr)[<span class="number">5</span>][<span class="number">5</span>][<span class="number">5</span>] = (<span class="keyword">void</span> *)arr;</div></pre></td></tr></table></figure>
+<h3 id="Q6：C-中两个冒号代表了什么？"><a href="#Q6：C-中两个冒号代表了什么？" class="headerlink" title="Q6：C++中两个冒号代表了什么？"></a>Q6：C++中两个冒号代表了什么？</h3><p><code>::</code>表示最外层的命名空间，也就是global namespace。<br>具体参考SO上这个问题<a href="http://stackoverflow.com/questions/4269034/what-is-the-meaning-of-prepended-double-colon-to-class-name" target="_blank" rel="external">What is the meaning of prepended double colon “::” to class name?</a>。</p>
+<h3 id="Q7：intptr-t这个类型是干什么的？"><a href="#Q7：intptr-t这个类型是干什么的？" class="headerlink" title="Q7：intptr_t这个类型是干什么的？"></a>Q7：intptr_t这个类型是干什么的？</h3><p>这个类型专门用来表示指针的地址，可以在指针对象和<code>intptr</code>对象之间进行转换。<br>参考这篇博文<a href="http://www.cnblogs.com/anker/p/3438480.html" target="_blank" rel="external">C语言指针转换为intptr_t类型</a>。</p>
+<h3 id="Q8：C-C-中struct类如何进行初始化？"><a href="#Q8：C-C-中struct类如何进行初始化？" class="headerlink" title="Q8：C/C++中struct类如何进行初始化？"></a>Q8：C/C++中struct类如何进行初始化？</h3><p>一般分成3种，顺序、C风格乱序和C++风格乱序：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">struct</span> User &#123;</div><div class="line">    <span class="keyword">int</span> id;             <span class="comment">//id</span></div><div class="line">    <span class="keyword">char</span> name[<span class="number">100</span>];     <span class="comment">//user name</span></div><div class="line">    <span class="keyword">char</span> *home;         <span class="comment">//home directory</span></div><div class="line">    <span class="keyword">int</span> passwd;         <span class="comment">//password</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line"> * 顺序进行初始化</div><div class="line"> */</div><div class="line"><span class="keyword">struct</span> User oneUser = &#123;<span class="number">10</span>, <span class="string">"Lucy"</span>, <span class="string">"/home/Lucy"</span>, <span class="number">0</span>&#125;;</div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line"> * C风格乱序进行初始化</div><div class="line"> */</div><div class="line"><span class="keyword">struct</span> User oneUser = &#123;</div><div class="line">    .name = <span class="string">"Lucy"</span>, </div><div class="line">    .id = <span class="number">10</span>,</div><div class="line">    .home = <span class="string">"/home/Lucy"</span></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line"> * C风格乱序进行初始化</div><div class="line"> */</div><div class="line"><span class="keyword">struct</span> User oneUser = &#123;</div><div class="line">    name:<span class="string">"Lucy"</span>, </div><div class="line">    id:<span class="number">10</span>,</div><div class="line">    home:<span class="string">"/home/Lucy"</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>注意在g++编译器中，乱序只能用在<code>*.c</code>的文件中，而<code>*.cc</code>和<code>*.cpp</code>都是不支持的，会报下面这个错。<br><code>sorry, unimplemented: non-trivial designated initializers not supported</code><br>具体可参考这篇博文<a href="http://blog.csdn.net/johnny710vip/article/details/7281131" target="_blank" rel="external">C/C++ struct初始化/复制/内存分配技巧</a>。</p>
+<h3 id="Q9：在函数内给指针分配内存空间会怎样？"><a href="#Q9：在函数内给指针分配内存空间会怎样？" class="headerlink" title="Q9：在函数内给指针分配内存空间会怎样？"></a>Q9：在函数内给指针分配内存空间会怎样？</h3><p>在函数内给指针分配内存空间会造成拷贝，造成内存泄露而且函数外无法使用，所以要避免。</p>
+<h2 id="Q10：如何区别C-中的几种类型转换操作符？"><a href="#Q10：如何区别C-中的几种类型转换操作符？" class="headerlink" title="Q10：如何区别C++中的几种类型转换操作符？"></a>Q10：如何区别C++中的几种类型转换操作符？</h2><p>一般有<code>static_cast&lt;&gt;()</code>，<code>reinterpret_cast&lt;&gt;()</code>，<code>const_cast&lt;&gt;()</code>，和<code>dynamic_cast&lt;&gt;()</code>这四种不同的类型转换方法。</p>
+<p>具体的区别和使用，参考这两篇SO提问<a href="http://stackoverflow.com/questions/103512/in-c-why-use-static-castintx-instead-of-intx" target="_blank" rel="external">In C++, why use static_cast<int>(x) instead of (int)x?</int></a>，<a href="http://stackoverflow.com/questions/332030/when-should-static-cast-dynamic-cast-const-cast-and-reinterpret-cast-be-used" target="_blank" rel="external">When should static_cast, dynamic_cast, const_cast and reinterpret_cast be used?</a>以及一篇博文<a href="http://blog.csdn.net/bzhxuexi/article/details/17021559" target="_blank" rel="external">C++中static_cast, dynamic_cast, const_cast用法/使用情况及区别解析</a>。</p>
+<p>注意几个点：<code>const_cast&lt;&gt;()</code>有一个未定义行为，就是把指向常量变量的常量指针转为普通指针，这是未定义的危险行为。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> num = <span class="number">10</span>;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span>* numPtr = &amp;num;</div><div class="line"><span class="keyword">int</span>* unsafePtr = <span class="keyword">const_cast</span>&lt;<span class="keyword">int</span>*&gt;(numPtr);</div></pre></td></tr></table></figure>
+<p><code>dynamic_cast&lt;&gt;()</code>进行downcast时，要求基类得有一个虚函数，否则会报错。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/笔记/" rel="tag">#笔记</a>
+          
+            <a href="/tags/日常/" rel="tag">#日常</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/05/06/Note-Intro-to-Graphs/" rel="next" title="#开发笔记# 图类问题解法笔记">
+                <i class="fa fa-chevron-left"></i> #开发笔记# 图类问题解法笔记
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/07/19/Note-Mix-C-and-C-Plus-Plus/" rel="prev" title="#开发笔记# 如何混编C++和C">
+                #开发笔记# 如何混编C++和C <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Chen You" />
+          <p class="site-author-name" itemprop="name">Chen You</p>
+          <p class="site-description motion-element" itemprop="description">东张西望 一无所长</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/chenyou-fdu" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github-alt"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/1924480272" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/chen-you-fdu" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/lazyguy/" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Q1-在CMake设置中，如何设置Debug模式？"><span class="nav-number">1.</span> <span class="nav-text">Q1: 在CMake设置中，如何设置Debug模式？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q2：C99中PRIu64这一类宏如何使用？"><span class="nav-number">2.</span> <span class="nav-text">Q2：C99中PRIu64这一类宏如何使用？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q3：如果一个字符串不是以NULL（-0）结尾怎么进行输出？"><span class="nav-number">3.</span> <span class="nav-text">Q3：如果一个字符串不是以NULL（\0）结尾怎么进行输出？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q4：printf中-a是什么？"><span class="nav-number">4.</span> <span class="nav-text">Q4：printf中%a是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q5：如何把一个一维数组转成多维数组来使用？"><span class="nav-number">5.</span> <span class="nav-text">Q5：如何把一个一维数组转成多维数组来使用？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q6：C-中两个冒号代表了什么？"><span class="nav-number">6.</span> <span class="nav-text">Q6：C++中两个冒号代表了什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q7：intptr-t这个类型是干什么的？"><span class="nav-number">7.</span> <span class="nav-text">Q7：intptr_t这个类型是干什么的？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q8：C-C-中struct类如何进行初始化？"><span class="nav-number">8.</span> <span class="nav-text">Q8：C/C++中struct类如何进行初始化？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q9：在函数内给指针分配内存空间会怎样？"><span class="nav-number">9.</span> <span class="nav-text">Q9：在函数内给指针分配内存空间会怎样？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q10：如何区别C-中的几种类型转换操作符？"><span class="nav-number"></span> <span class="nav-text">Q10：如何区别C++中的几种类型转换操作符？</span></a></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Chen You</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+</body>
+</html>
