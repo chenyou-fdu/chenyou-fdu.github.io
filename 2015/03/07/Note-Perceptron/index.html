@@ -92,7 +92,7 @@
 <meta property="og:site_name" content="My Beatnik Park">
 <meta property="og:description" content="损失函数设为误分类点到超平面的总距离：$$\frac{1}{||\mathbf{w}||}\sum_{x_i\in{M}}y_i(w\cdot{x}+b)$$这里$||w||$是$\mathbf{w}$的$L_2$范数，$M$为误分类点集合。这个总距离的求法：
 设点$x_0$到超平面$S:\mathbf{w}\cdot\mathbf{x}+b=0$的距离为$d$。设点$x_0$在平面$S$上的投影">
-<meta property="og:updated_time" content="2016-12-17T01:49:12.301Z">
+<meta property="og:updated_time" content="2016-12-17T14:36:00.169Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="感知机（Perceptron）">
 <meta name="twitter:description" content="损失函数设为误分类点到超平面的总距离：$$\frac{1}{||\mathbf{w}||}\sum_{x_i\in{M}}y_i(w\cdot{x}+b)$$这里$||w||$是$\mathbf{w}$的$L_2$范数，$M$为误分类点集合。这个总距离的求法：
@@ -705,6 +705,26 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 

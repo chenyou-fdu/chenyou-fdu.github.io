@@ -92,7 +92,7 @@
 <meta property="og:site_name" content="My Beatnik Park">
 <meta property="og:description" content="最近重新复习了下堆排序和优先队列，这里做下笔记。
 堆排序实现堆排序实现使用最大堆，时间复杂度最好最差平均都是$O(NlogN)$。123456789101112131415161718192021222324252627282930313233int leftChild(int idx) &amp;#123;    return (idx + 1) * 2 - 1;&amp;#125;int rightChild">
-<meta property="og:updated_time" content="2016-12-17T04:03:53.540Z">
+<meta property="og:updated_time" content="2016-12-17T14:35:01.105Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="堆排序和优先队列">
 <meta name="twitter:description" content="最近重新复习了下堆排序和优先队列，这里做下笔记。
@@ -702,6 +702,26 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 
