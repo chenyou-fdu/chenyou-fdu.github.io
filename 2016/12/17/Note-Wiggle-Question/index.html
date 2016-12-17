@@ -1,0 +1,740 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="算法,LeetCode," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="LeetCode里有几道关于摇摆（Wiggle，数组元素满足一高一低这类条件）数组的题，这里来总结一下。
+Wiggle Sort这题在LeetCode上要钱，我在LintCode上找到了替代——摆动排序。这里数组内元素可以相等，所以比较简单，一般有两种解法。第一种是通过排序后，除了第一个元素之外，每两个元素交换一下位置就行（例如nums[1]和nums[2]，nums[3]和nunms[4]）。参">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode上的Wiggle类题目">
+<meta property="og:url" content="http://yoursite.com/2016/12/17/Note-Wiggle-Question/index.html">
+<meta property="og:site_name" content="My Beatnik Park">
+<meta property="og:description" content="LeetCode里有几道关于摇摆（Wiggle，数组元素满足一高一低这类条件）数组的题，这里来总结一下。
+Wiggle Sort这题在LeetCode上要钱，我在LintCode上找到了替代——摆动排序。这里数组内元素可以相等，所以比较简单，一般有两种解法。第一种是通过排序后，除了第一个元素之外，每两个元素交换一下位置就行（例如nums[1]和nums[2]，nums[3]和nunms[4]）。参">
+<meta property="og:updated_time" content="2016-12-17T14:08:35.596Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LeetCode上的Wiggle类题目">
+<meta name="twitter:description" content="LeetCode里有几道关于摇摆（Wiggle，数组元素满足一高一低这类条件）数组的题，这里来总结一下。
+Wiggle Sort这题在LeetCode上要钱，我在LintCode上找到了替代——摆动排序。这里数组内元素可以相等，所以比较简单，一般有两种解法。第一种是通过排序后，除了第一个元素之外，每两个元素交换一下位置就行（例如nums[1]和nums[2]，nums[3]和nunms[4]）。参">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/12/17/Note-Wiggle-Question/"/>
+
+
+
+
+
+  <title> LeetCode上的Wiggle类题目 | My Beatnik Park </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">My Beatnik Park</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Give Me Gin and Tonic</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/17/Note-Wiggle-Question/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Chen You">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="My Beatnik Park">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="My Beatnik Park" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                LeetCode上的Wiggle类题目
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-17T09:51:19+08:00">
+                2016-12-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法/" itemprop="url" rel="index">
+                    <span itemprop="name">算法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>LeetCode里有几道关于摇摆（Wiggle，数组元素满足一高一低这类条件）数组的题，这里来总结一下。</p>
+<h2 id="Wiggle-Sort"><a href="#Wiggle-Sort" class="headerlink" title="Wiggle Sort"></a>Wiggle Sort</h2><p>这题在LeetCode上要钱，我在LintCode上找到了替代——<a href="http://www.lintcode.com/zh-cn/problem/wiggle-sort/" target="_blank" rel="external">摆动排序</a>。这里数组内元素可以相等，所以比较简单，一般有两种解法。<br>第一种是通过排序后，除了第一个元素之外，每两个元素交换一下位置就行（例如<code>nums[1]</code>和<code>nums[2]</code>，<code>nums[3]</code>和<code>nunms[4]</code>）。参考代码：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">wiggleSort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</div><div class="line">    sort(nums.begin(), nums.end());</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; nums.size(); i += <span class="number">2</span>)</div><div class="line">        swap(nums[i], nums[i<span class="number">-1</span>]);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>另一种就是用贪心法来解，设当前位置下标为<code>i</code>，如果<code>i</code>是奇数，那么需要满足<code>nums[i-1] &gt;= nums[i]</code>；如果<code>i</code>是偶数，那么需要满足<code>nums[i-1] &lt;= nums[i]</code>，如果出现不满足的情况，就交换下<code>nums[i-1]</code>和<code>nums[i]</code>就行了。<br>这种解法的证明可以参考<a href="https://discuss.leetcode.com/topic/42605/my-explanations-of-the-best-voted-algo" target="_blank" rel="external">My explanations of the best voted Algo</a>。参考代码：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">wiggleSort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; nums.size(); i++)</div><div class="line">        <span class="keyword">if</span>(i % <span class="number">2</span> == <span class="number">1</span> &amp;&amp; nums[i<span class="number">-1</span>] &gt; nums[i] || </div><div class="line">        	i % <span class="number">2</span> == <span class="number">0</span> &amp;&amp; nums[i<span class="number">-1</span>] &lt; nums[i]) </div><div class="line">            swap(nums[i<span class="number">-1</span>], nums[i]);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<h2 id="Wiggle-Sort-II"><a href="#Wiggle-Sort-II" class="headerlink" title="Wiggle Sort II"></a>Wiggle Sort II</h2><p>LeetCode上有Wiggle Sort这题的加难版，<a href="https://leetcode.com/problems/wiggle-sort-ii/" target="_blank" rel="external">Wiggle Sort II</a>。这题比较直观的就是排序来解。解法的时间复杂度为$O(nlogn)$，需要用到$O(n)$大小的额外空间。排序后把数组分成两部分，然后两部分都逆序依次填入新数组中。参考代码：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">wiggleSort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</div><div class="line">    <span class="comment">// 注意这里mid的求法，不能简单的size/2</span></div><div class="line">    <span class="keyword">int</span> size = nums.size(), mid = <span class="number">0</span> + (size<span class="number">-1</span>)/<span class="number">2</span>, fPtr = mid, sPtr = size<span class="number">-1</span>, ptr = <span class="number">0</span>;</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; tmp = nums;</div><div class="line">    sort(tmp.begin(), tmp.end());</div><div class="line">    <span class="keyword">while</span>(fPtr &gt;= <span class="number">0</span> || sPtr &gt; size/<span class="number">2</span>) &#123;</div><div class="line">        nums[ptr++] = fPtr &gt;= <span class="number">0</span> ? tmp[fPtr--] : tmp[sPtr--];</div><div class="line">        nums[ptr++] = sPtr &gt; mid ? tmp[sPtr--] : tmp[fPtr--];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>进一步优化一下，可以发现这里不一定需要排序的。可以首先寻找到中值（用Kth Largest方法或者STL自带的<code>nth_element</code>函数都可以），然后把数组用解<a href="https://en.wikipedia.org/wiki/Dutch_national_flag_problem" target="_blank" rel="external">荷兰国旗问题（Dutch National Flag）</a>的三路划分算法分成小于中值的、等于中值的和大于中值的。然后就和上一种解法一样了，逆序依次填入新数组中就行。<br>这种解法的时间复杂度是$O(n)$（<code>nth_element</code>函数一般的实现都是用<a href="https://en.wikipedia.org/wiki/Quickselect" target="_blank" rel="external">Quickselect算法</a>，这种算法的平均时间复杂度是$O(n)$，最坏时间复杂度是$O(n^2)$），需要用到$O(n)$的额外空间。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">ThreeWayPartition</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> midVal)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> size = nums.size(), fPtr = <span class="number">0</span>, tPtr = size<span class="number">-1</span>, ptr = <span class="number">0</span>;</div><div class="line">    <span class="keyword">while</span>(ptr &lt; tPtr) &#123;</div><div class="line">        <span class="keyword">if</span>(nums[ptr] &gt; midVal) swap(nums[ptr], nums[tPtr--]);</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(nums[ptr] &lt; midVal) swap(nums[ptr++], nums[fPtr++]);</div><div class="line">        <span class="keyword">else</span> ptr++;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">wiggleSort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> size = nums.size();</div><div class="line">    <span class="comment">// 寻找中值</span></div><div class="line">    <span class="keyword">auto</span> midPtr = nums.begin()+size/<span class="number">2</span>;</div><div class="line">    nth_element(nums.begin(), midPtr, nums.end());</div><div class="line">    <span class="keyword">int</span> midVal = *midPtr;</div><div class="line">    <span class="comment">// 三路划分</span></div><div class="line">    ThreeWayPartition(nums, midVal);</div><div class="line">    <span class="comment">// 逆序插入</span></div><div class="line">    <span class="keyword">int</span> mid = <span class="number">0</span> + (size<span class="number">-1</span>)/<span class="number">2</span>, fPtr = mid, sPtr = size<span class="number">-1</span>, ptr = <span class="number">0</span>;</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; tmp = nums;</div><div class="line">    <span class="keyword">while</span>(fPtr &gt;= <span class="number">0</span> || sPtr &gt; size/<span class="number">2</span>) &#123;</div><div class="line">        nums[ptr++] = fPtr &gt;= <span class="number">0</span> ? tmp[fPtr--] : tmp[sPtr--];</div><div class="line">        nums[ptr++] = sPtr &gt; mid ? tmp[sPtr--] : tmp[fPtr--];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>还可以更进一步优化，就是比较难了。可以观察到，大于中值的，顺着放到奇数格子里；小于中值的逆着放在偶数格子里，剩下的放等于中值的。这种解法可以总结出一个下标映射的数学规律，这样就可以在做三路划分时直接放，不用额外空间（这里前提条件是找中值没用用额外空间）。<br>下标映射用的是<code>(1 + 2 * index) % (n|1)</code>，这个正好可以把大于中值的映射到奇数上，小于中值的映射到偶数上。具体列表一下就可以看出来，取模是为了保证不超过数组长，而<code>n|1</code>是保证奇偶性。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">wiggleSort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> size = nums.size();</div><div class="line">    <span class="keyword">if</span>(size &lt;= <span class="number">1</span>) <span class="keyword">return</span>;</div><div class="line">    <span class="comment">// 寻找中值</span></div><div class="line">    <span class="keyword">auto</span> midPtr = nums.begin()+size/<span class="number">2</span>;</div><div class="line">    nth_element(nums.begin(), midPtr, nums.end());</div><div class="line">    <span class="keyword">int</span> midVal = *midPtr;</div><div class="line">    <span class="keyword">auto</span> indexMap = [size](<span class="keyword">int</span> index) &#123; <span class="keyword">return</span> (<span class="number">1</span>+<span class="number">2</span>*index) % (size | <span class="number">1</span>);&#125;;</div><div class="line">    <span class="comment">// 注意这里和一般三路划分算法的不同，小于中值的放后面，大于中值的放前面</span></div><div class="line">    <span class="keyword">int</span> i = <span class="number">0</span>, j = size<span class="number">-1</span>, k = <span class="number">0</span>;</div><div class="line">    <span class="keyword">while</span>(k &lt;= j) &#123;</div><div class="line">        <span class="keyword">if</span>(nums[indexMap(k)] &lt; midVal) swap(nums[indexMap(k)], nums[indexMap(j--)]);</div><div class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(nums[indexMap(k)] &gt; midVal) swap(nums[indexMap(k++)], nums[indexMap(i++)]);</div><div class="line">        <span class="keyword">else</span> k++;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="Wiggle-Subsequence"><a href="#Wiggle-Subsequence" class="headerlink" title="Wiggle Subsequence"></a>Wiggle Subsequence</h2><p><a href="https://leetcode.com/problems/wiggle-subsequence/" target="_blank" rel="external">Wiggle Subsequence</a>和之前两题不一样，是个动态规划的题。<br> 最直观的DP，时间复杂度是$O(n^2)$，类似最长上升子序列那种解法，但是这里需要两个数组，一个记录当前最长序列，另一个来记录当前序列是需要一个上升的元素，还是一个下降的元素。参考代码</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">wiggleMaxLength</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span>(nums.empty()) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    <span class="keyword">int</span> size = nums.size();</div><div class="line">    <span class="comment">// dpFlag[i]表示第i个元素是需要大于i-1还是小于i-1</span></div><div class="line">    <span class="comment">// 0表示需要小于i-1，1表示需要大于i-1，而-1是指第一个元素，大小无所谓</span></div><div class="line">    <span class="comment">// dpValue[i]表示从0...i这些元素中，符合要求的最长子序列长度</span></div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; dpValue(size, <span class="number">1</span>), dpFlag(size, <span class="number">-1</span>);</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; size; i++)</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++) &#123;</div><div class="line">            <span class="keyword">if</span>(nums[i] &gt; nums[j] &amp;&amp; dpFlag[j] != <span class="number">0</span> &amp;&amp; dpValue[i] &lt; dpValue[j] + <span class="number">1</span>) &#123;</div><div class="line">                dpValue[i] = dpValue[j] + <span class="number">1</span>;</div><div class="line">                dpFlag[i] = <span class="number">0</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span>(nums[i] &lt; nums[j] &amp;&amp; dpFlag[j] != <span class="number">1</span> &amp;&amp; dpValue[i] &lt; dpValue[j] + <span class="number">1</span>) &#123;</div><div class="line">                dpValue[i] = dpValue[j] + <span class="number">1</span>;</div><div class="line">                dpFlag[i] = <span class="number">1</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    <span class="keyword">return</span> dpValue[size<span class="number">-1</span>];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>参考<a href="https://leetcode.com/articles/wiggle-subsequence/" target="_blank" rel="external">官方题解</a>和<a href="https://discuss.leetcode.com/topic/52052/c-0ms-o-n-dynamic-programming-solution" target="_blank" rel="external">C++ 0ms O(N) dynamic programming solution</a>，可以用一种时间复杂度$O(n)$的解法来解。</p>
+<ul>
+<li><code>up[i]</code>记录到i这个元素为止（不一定以<code>nums[i]</code>结尾），末尾两个元素为上升状态的子序列的长度最大值，而<code>down[i]</code>则相反，表示下降。</li>
+<li>例如<code>nums[i] &gt; nums[i-1]</code>时，可以构造一个新的上升末尾，那么就需要用前一个下降末尾状态的值加一得到新的上升末尾状态。这里假设当前下降末尾状态的序列以<code>N</code>结尾。<ul>
+<li>如果<code>nums[i] &gt; N</code>，那么很明显可以构造一个新的，更长的上升末尾状态。</li>
+<li>如果<code>nums[i] &lt;= N</code>：<ul>
+<li>首先<code>N != nums[i-1]</code>，<code>N = nums[i-1] &gt;= nums[i]</code>和 <code>nums[i] &gt; nums[i-1]</code>矛盾了。</li>
+<li>所以，利用条件<code>N &gt;= nums[i] &gt; nums[i-1]</code>这个条件，可以用<code>nums[i-1]</code>来替代<code>N</code>。这样仍然满足下降条件，同时又使<code>nums[i] &gt; newN = nums[i-1]</code>，可以构成新的更长的上升末尾状态。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>而对于之前的下降末尾状态呢，用<code>nums[i]</code>是无法构成一个更长的下降末尾的，首先下降某末尾要是<code>nums[i-1]</code>，那肯定不行因为<code>nums[i]</code>更大；要末尾不是<code>nums[i-1]</code>时，用<code>nums[i]</code>来增加长度和用<code>nums[i-1]</code>来增加长度没有区别了。</li>
+<li>当<code>nums[i] &lt; nums[i-1]</code>情况类似。当然这个DP也可以优化空间到<code>O(1)</code>，比较简单了。</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">wiggleMaxLength</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span>(nums.empty()) <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    <span class="keyword">int</span> size = nums.size();</div><div class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; up(size, <span class="number">0</span>), down(size, <span class="number">0</span>);</div><div class="line">    up[<span class="number">0</span>] = <span class="number">1</span>, down[<span class="number">0</span>] = <span class="number">1</span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; size; i++) &#123;</div><div class="line">        <span class="keyword">if</span>(nums[i] &gt; nums[i<span class="number">-1</span>]) &#123;</div><div class="line">            up[i] = down[i<span class="number">-1</span>]+<span class="number">1</span>;</div><div class="line">            down[i] = down[i<span class="number">-1</span>];</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(nums[i] &lt; nums[i<span class="number">-1</span>]) &#123;</div><div class="line">            up[i] = up[i<span class="number">-1</span>];</div><div class="line">            down[i] = up[i<span class="number">-1</span>]+<span class="number">1</span>;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            up[i] = up[i<span class="number">-1</span>];</div><div class="line">            down[i] = down[i<span class="number">-1</span>];</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> max(up[size<span class="number">-1</span>], down[size<span class="number">-1</span>]);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>还有一种更简单的解法。如果每次构造上升序列时，都选择值最大的那个元素（递增元素里最后的那个）；而构造下降序列时，选择值最小的那个元素（递减元素里最后那个），这个序列肯定是最长的。这样就可以贪心法来解，参考代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">wiggleMaxLength</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span>(nums.size() &lt;= <span class="number">1</span>) <span class="keyword">return</span> (<span class="keyword">int</span>)nums.size();</div><div class="line">    <span class="keyword">int</span> prevDiff = nums[<span class="number">1</span>] - nums[<span class="number">0</span>], cnt = prevDiff == <span class="number">0</span> ? <span class="number">1</span> : <span class="number">2</span>;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt; nums.size(); i++) &#123;</div><div class="line">        <span class="keyword">int</span> nowDiff = nums[i] - nums[i<span class="number">-1</span>];</div><div class="line">        <span class="comment">// 如果一直递增或者一直递减，就不选当前的元素，直到发生变化</span></div><div class="line">        <span class="comment">// 注意这里是大于等于</span></div><div class="line">        <span class="keyword">if</span>((prevDiff &lt;= <span class="number">0</span> &amp;&amp; nowDiff &gt; <span class="number">0</span>) || (prevDiff &gt;= <span class="number">0</span> &amp;&amp; nowDiff &lt; <span class="number">0</span>)) &#123;</div><div class="line">            prevDiff = nowDiff;</div><div class="line">            cnt++;</div><div class="line">        &#125; </div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> cnt;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这几个题感觉都挺好的，难道适中，考察的也是很重要的点。比如荷兰国旗问题的解法，还有TopK问题的解法，以及动态规划的一些东西。</p>
+<h3 id="其他参考"><a href="#其他参考" class="headerlink" title="其他参考"></a>其他参考</h3><ul>
+<li><a href="https://discuss.leetcode.com/topic/32904/clean-average-o-n-time-in-c" target="_blank" rel="external">Clean average O(n) time in c++</a></li>
+<li><a href="http://stackoverflow.com/questions/11068429/nth-element-implementations-complexities" target="_blank" rel="external">nth_element implementations complexities</a></li>
+<li><a href="https://discuss.leetcode.com/topic/32920/o-n-time-o-1-space-solution-with-detail-explanations" target="_blank" rel="external">O(n)-time O(1)-space solution with detail explanations</a></li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/08/Note-Heap-Sort/" rel="next" title="堆排序和优先队列">
+                <i class="fa fa-chevron-left"></i> 堆排序和优先队列
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="Chen You" />
+          <p class="site-author-name" itemprop="name">Chen You</p>
+          <p class="site-description motion-element" itemprop="description">东张西望 一无所长</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/chenyou-fdu" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github-alt"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/1924480272" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/chen-you-fdu" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/lazyguy/" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  豆瓣
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Wiggle-Sort"><span class="nav-number">1.</span> <span class="nav-text">Wiggle Sort</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Wiggle-Sort-II"><span class="nav-number">2.</span> <span class="nav-text">Wiggle Sort II</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Wiggle-Subsequence"><span class="nav-number">3.</span> <span class="nav-text">Wiggle Subsequence</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#其他参考"><span class="nav-number">4.1.</span> <span class="nav-text">其他参考</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Chen You</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
