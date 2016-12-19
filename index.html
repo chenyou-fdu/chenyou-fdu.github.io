@@ -259,7 +259,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/17/Note-Wiggle-Question/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/19/Make-a-ThreadPool/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Chen You">
@@ -284,7 +284,150 @@
             
               
                 
-                <a class="post-title-link" href="/2016/12/17/Note-Wiggle-Question/" itemprop="url">
+                <a class="post-title-link" href="/2016/12/19/Make-a-ThreadPool/" itemprop="url">
+                  再造一个线程池
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-19T22:01:18+08:00">
+                2016-12-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/开发/" itemprop="url" rel="index">
+                    <span itemprop="name">开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>之前写实验室项目用过一些开源的C++线程池来加速算法，然后就想着自己重新造个轮子，学习一个。<br>这个东西比较简单，代码也很少，已经基本写完了，放在了<a href="https://github.com/chenyou-fdu/RickThreadPool">Github</a>上。但是在写的过程中，碰到了很多C++11的新特性，学到了很多东西，在这里总结一下。</p>
+<h2 id="Prefect-Forward-完美转发"><a href="#Prefect-Forward-完美转发" class="headerlink" title="Prefect Forward 完美转发"></a>Prefect Forward 完美转发</h2><p>因为要去实现一个库，所以肯定要用上template的内容，于是就碰到了这个问题。<br>找了下资料，通过<a href="https://codinfox.github.io/dev/2014/06/03/move-semantic-perfect-forward/">移动语义（move semantic）和完美转发（perfect forward</a>这个学习了右值、右值引用、移动语义还有完美转发这一大堆东西，讲得还是很易懂的。</p>
+<p>所以实现往线程库里添加工作函数的功能时，就用上了这个。<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">template&lt;class F, class... Args&gt;</div><div class="line">inline auto enqueue(F&amp;&amp; f, Args&amp;&amp;... args) -&gt; std::future&lt;decltype(f(args...))&gt; </div><div class="line">&#123;</div><div class="line">    /* ... */</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这里的<code>F&amp;&amp; f</code>就是个通用引用了，为了保证完美转发，后面代码里用上了<code>std::forward&lt;T&gt;()</code>函数（不这样转发到下一个函数里就会被当成左值）：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">auto</span> task = <span class="built_in">std</span>::make_shared&lt; <span class="built_in">std</span>::packaged_task&lt;fReturnType()&gt; &gt;(</div><div class="line">                <span class="built_in">std</span>::bind(<span class="built_in">std</span>::forward&lt;F&gt;(f), <span class="built_in">std</span>::forward&lt;Args&gt;(args)...)</div><div class="line">            );</div></pre></td></tr></table></figure></p>
+<p>这样，就可以在不改变语义的情况下，正确的使用左值和右值，提高效率。</p>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/12/19/Make-a-ThreadPool/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/12/17/Wiggle-Question/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Chen You">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="My Beatnik Park">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="My Beatnik Park" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/12/17/Wiggle-Question/" itemprop="url">
                   LeetCode上的Wiggle类题目
                 </a>
               
@@ -359,7 +502,7 @@
 <p>另一种就是用贪心法来解，设当前位置下标为<code>i</code>，如果<code>i</code>是奇数，那么需要满足<code>nums[i-1] &gt;= nums[i]</code>；如果<code>i</code>是偶数，那么需要满足<code>nums[i-1] &lt;= nums[i]</code>，如果出现不满足的情况，就交换下<code>nums[i-1]</code>和<code>nums[i]</code>就行了。<br>这种解法的证明可以参考<a href="https://discuss.leetcode.com/topic/42605/my-explanations-of-the-best-voted-algo">My explanations of the best voted Algo</a>。参考代码：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">wiggleSort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; nums.size(); i++)</div><div class="line">        <span class="keyword">if</span>(i % <span class="number">2</span> == <span class="number">1</span> &amp;&amp; nums[i<span class="number">-1</span>] &gt; nums[i] || </div><div class="line">        	i % <span class="number">2</span> == <span class="number">0</span> &amp;&amp; nums[i<span class="number">-1</span>] &lt; nums[i]) </div><div class="line">            swap(nums[i<span class="number">-1</span>], nums[i]);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/12/17/Note-Wiggle-Question/#more" rel="contents">
+            <a class="btn" href="/2016/12/17/Wiggle-Question/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -400,7 +543,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/05/08/Note-Heap-Sort/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/05/08/Heap-Sort/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="Chen You">
@@ -425,7 +568,7 @@
             
               
                 
-                <a class="post-title-link" href="/2016/05/08/Note-Heap-Sort/" itemprop="url">
+                <a class="post-title-link" href="/2016/05/08/Heap-Sort/" itemprop="url">
                   堆排序和优先队列
                 </a>
               
@@ -499,7 +642,7 @@
 <h2 id="堆排序实现"><a href="#堆排序实现" class="headerlink" title="堆排序实现"></a>堆排序实现</h2><p>堆排序实现使用最大堆，时间复杂度最好最差平均都是$O(NlogN)$。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">leftChild</span><span class="params">(<span class="keyword">int</span> idx)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> (idx + <span class="number">1</span>) * <span class="number">2</span> - <span class="number">1</span>;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">rightChild</span><span class="params">(<span class="keyword">int</span> idx)</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> (idx + <span class="number">1</span>) * <span class="number">2</span>;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">maxHeap</span><span class="params">(<span class="keyword">int</span> idx, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums, <span class="keyword">int</span> size)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (idx &gt;= size) <span class="keyword">return</span>;</div><div class="line">    <span class="keyword">int</span> maxVal = nums[idx], maxIdx = idx;</div><div class="line">    <span class="keyword">int</span> leftIdx = leftChild(idx), rightIdx = rightChild(idx);</div><div class="line">    <span class="keyword">if</span> (leftIdx &lt; size &amp;&amp; maxVal &lt; nums[leftIdx]) &#123;</div><div class="line">        maxIdx = leftIdx;</div><div class="line">        maxVal = nums[leftIdx];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (rightIdx &lt; size &amp;&amp; maxVal &lt; nums[rightIdx]) &#123;</div><div class="line">        maxIdx = rightIdx;</div><div class="line">        maxVal = nums[rightIdx];</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span> (maxIdx != idx) &#123;</div><div class="line">        swap(nums[idx], nums[maxIdx]);</div><div class="line">        maxHeap(maxIdx, nums, size);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">heapSort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> size = nums.size();</div><div class="line">    <span class="comment">//建堆从后往前，size/2-1是最后一个有子节点的结点</span></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = size / <span class="number">2</span> - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) maxHeap(i, nums, size);</div><div class="line">    <span class="keyword">while</span> (size &gt; <span class="number">0</span>) &#123;</div><div class="line">        swap(nums[<span class="number">0</span>], nums[size - <span class="number">1</span>]);</div><div class="line">        size--;</div><div class="line">        maxHeap(<span class="number">0</span>, nums, size);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/05/08/Note-Heap-Sort/#more" rel="contents">
+            <a class="btn" href="/2016/05/08/Heap-Sort/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -821,146 +964,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/08/21/Note-Bit-Vector-Sort/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Chen You">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="My Beatnik Park">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="My Beatnik Park" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/08/21/Note-Bit-Vector-Sort/" itemprop="url">
-                  位图排序
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-08-21T11:02:53+08:00">
-                2015-08-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法/" itemprop="url" rel="index">
-                    <span itemprop="name">算法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>这篇是看过编程珠玑里位图排序的部分后，进行了一些实现，然后简单记录下。</p>
-<h2 id="实现位向量"><a href="#实现位向量" class="headerlink" title="实现位向量"></a>实现位向量</h2><p>注意这里实现一个位向量的方法：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">define</span> BITPERWORD 32 <span class="comment">//这里用的是int类型，在这里是32位</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> N 10000000 <span class="comment">//指定一共多少个数字需要在位向量中表示</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> SHIFT 5 <span class="comment">//定义了一个偏移量5，意义是 2^5 = 32</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MASK 0x1F <span class="comment">//0x1F的二进制表示是31个1，用于位操作     </span></span></div><div class="line"><span class="keyword">int</span> a[<span class="number">1</span>+N/BITSPERWORD]; <span class="comment">// 初始化了一个数组，用(1+N/BITSPERWORD)个32位数表示N个需要记录的数</span></div><div class="line"></div><div class="line"><span class="comment">//set函数将某一位置为1</span></div><div class="line"><span class="comment">//首先做i&gt;&gt;SHIFT，相当于i/32，这样就确定了是用第几个int中的某一位来存这个数</span></div><div class="line"><span class="comment">//然后是i&amp;MASK，这里相当于i%32，确定这个int中的第几位用来存这个数。</span></div><div class="line"><span class="comment">//然后根据上面的值对1左移，做OR操作就可以了。</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">set</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</div><div class="line">    a[i&gt;&gt;SHIFT] |=  (<span class="number">1</span>&lt;&lt;(i&amp;MASK)); </div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//clr函数将某一位清0，这里的过程和之前的set函数基本一样</span></div><div class="line"><span class="comment">//但是要注意的是这里用来清0的数要取反，而且做的是AND操作</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">clr</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</div><div class="line">    a[i&gt;&gt;SHIFT] &amp;= ~(<span class="number">1</span>&lt;&lt;(i&amp;MASK));</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//这里验证某一位是否为0</span></div><div class="line"><span class="comment">//但是注意这里当某一位不是0时，返回的不是1，而是该位为1其他位是0的一个数</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">test</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123; </div><div class="line">    <span class="keyword">return</span> a[i&gt;&gt;SHIFT] &amp;   (<span class="number">1</span>&lt;&lt;(i&amp;MASK));</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-          <!--noindex-->
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2015/08/21/Note-Bit-Vector-Sort/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1006,7 +1009,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-count">12</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1023,7 +1026,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -1076,6 +1079,12 @@
         </div>
 
         
+        
+          <div class="cc-license motion-element" itemprop="license">
+            <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" class="cc-opacity" target="_blank">
+              <img src="/images/cc-by-nc-nd.svg" alt="Creative Commons" />
+            </a>
+          </div>
         
 
         
